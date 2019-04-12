@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 export default class AnimalList extends Component {
     render () {
         return (
-            <section className="animals"> 
+            <section className="content"> 
             {
                 this.props.animals.map(animal =>
                     <div key={animal.id}>
