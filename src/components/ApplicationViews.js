@@ -31,6 +31,30 @@ componentDidMount() {
         .then(owners => newState.owners = owners)
         .then(() => this.setState(newState))
 }
+deleteAnimal = id => {
+    return fetch(`http://localhost:5002/animals/${id}`, {
+        method: "DELETE"
+    })
+    .then(e => e.json())
+    .then(() => fetch(`http://localhost:5002/animals`))
+    .then(e => e.json())
+    .then(animals => this.setState({
+        animals: animals
+    })
+    )
+}
+deleteEmployee = id => {
+    return fetch(`http://localhost:5002/employees/${id}`, {
+        method: "DELETE"
+    })
+    .then(e => e.json())
+    .then(() => fetch(`http://localhost:5002/employees`))
+    .then(e => e.json())
+    .then(employees => this.setState({
+        employees: employees
+    })
+  )
+}
 render() {
     // Inside of our render component we are ROUTING! 
     return (
@@ -42,11 +66,11 @@ render() {
             }} />
             {/* Here we can specify /animals because we've already routed to our first component. */}
             <Route path="/animals" render={(props) => {
-                return <AnimalList animals={this.state.animals} />
+                return <AnimalList return deleteAnimal={this.deleteAnimal} animals={this.state.animals} />
             }} />
             <Route path="/employees" render={(props) => {
                 // This says that 
-                return <EmployeeList employees={this.state.employees} />
+                return <EmployeeList return deleteEmployee={this.deleteEmployee} employees={this.state.employees} />
             }} />
             <Route path="/owners" render={(props) => {
                 return <OwnerList owners={this.state.owners} />
