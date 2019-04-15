@@ -1,0 +1,67 @@
+{
+  "employees": [
+    {
+      "id": 2,
+      "name": "Jordan Nelson"
+    },
+    {
+      "id": 3,
+      "name": "Zoe LeBlanc"
+    },
+    {
+      "id": 4,
+      "name": "Blaise Roberts"
+    }
+  ],
+  "locations": [
+    {
+      "id": 1,
+      "name": "Nashville North",
+      "address": "500 Circle Way"
+    },
+    {
+      "id": 2,
+      "name": "Nashville South",
+      "address": "10101 Binary Court"
+    }
+  ],
+  "animals": [
+    {
+      "id": 3,
+      "name": "Rose",
+      "breed": "Akita"
+    },
+    {
+      "id": 4,
+      "name": "Rose",
+      "breed": "Chihuahua"
+    },
+    {
+      "id": 5,
+      "name": "Rose",
+      "breed": "Great Dane"
+    }
+  ],
+  "owners": [
+    {
+      "id": 1,
+      "name": "Pierre",
+      "phone": "1-800-DOGDAD"
+    },
+    {
+      "id": 2,
+      "name": "Virgile",
+      "phone": "1-800-DOGFAN"
+    },
+    {
+      "id": 3,
+      "name": "Brigitte",
+      "phone": "1-800-PARROTLUVR"
+    },
+    {
+      "id": 4,
+      "name": "Asa",
+      "phone": "1-800-ALLERGIES"
+    }
+  ]
+}
