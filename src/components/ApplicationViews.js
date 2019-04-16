@@ -5,6 +5,7 @@ import LocationList from './locations/LocationList'
 import EmployeeList from './employee/EmployeeList'
 import OwnerList from './owners/OwnerList'
 import './Kennel.css'
+import AnimalManager from '../modules/AnimalManager'
 
 export default class ApplicationViews extends Component {
 
@@ -17,8 +18,7 @@ state = {
 componentDidMount() {
     const newState = {}
 
-    fetch("http://localhost:5002/animals")
-        .then(r => r.json())
+    AnimalManager.getAll()
         .then(animals => newState.animals = animals)
         .then(() => fetch("http://localhost:5002/employees")
         .then(r => r.json()))
