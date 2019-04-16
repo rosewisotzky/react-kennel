@@ -6,6 +6,9 @@ import EmployeeList from './employee/EmployeeList'
 import OwnerList from './owners/OwnerList'
 import './Kennel.css'
 import AnimalManager from '../modules/AnimalManager'
+import EmployeeManager from '../modules/EmployeesManager'
+import LocationManager from '../modules/LocationsManager'
+import OwnerManager from '../modules/OwnersManager'
 
 export default class ApplicationViews extends Component {
 
@@ -17,17 +20,14 @@ state = {
 }
 componentDidMount() {
     const newState = {}
-
+// Instead of writing out our fetch calls here, we've created modules located in our conveniently named modules directory. We're using vanilla JavaScript because we want to adhere to the Single Responsibility rule. We also are keeping our React components to components that are responsible for displaying our data on the DOM through changing the state.
     AnimalManager.getAll()
         .then(animals => newState.animals = animals)
-        .then(() => fetch("http://localhost:5002/employees")
-        .then(r => r.json()))
+        EmployeeManager.getAll()
         .then(employees => newState.employees = employees)
-        .then(() => fetch("http://localhost:5002/locations")
-        .then(r => r.json()))
+        LocationManager.getAll()
         .then(locations => newState.locations = locations)
-        .then(() => fetch ("http://localhost:5002/owners")
-        .then(r => r.json()))
+        OwnerManager.getAll()
         .then(owners => newState.owners = owners)
         .then(() => this.setState(newState))
 }
