@@ -27,6 +27,11 @@
   ],
   "animals": [
     {
+      "id": 1,
+      "name": "Rose",
+      "breed": "St Bernard"
+    },
+    {
       "id": 3,
       "name": "Rose",
       "breed": "Akita"
