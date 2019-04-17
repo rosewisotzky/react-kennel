@@ -11,6 +11,7 @@ import LocationManager from '../modules/LocationsManager'
 import OwnerManager from '../modules/OwnersManager'
 import AnimalDetail from './animals/AnimalDetail'
 import { withRouter } from 'react-router'
+import AnimalForm from './animals/AnimalForm'
 
 
 
@@ -69,8 +70,16 @@ deleteOwner = id => {
     .then(owners => this.setState({
         owners: owners
     })
-  )
+    )
 }
+addAnimal = animal =>
+    AnimalManager.post(animal)
+        .then(() => AnimalManager.getAll())
+        .then(animals =>
+        this.setState({
+            animals: animals
+        })
+        );
 render() {
     // Inside of our render component we are ROUTING! 
     return (
@@ -82,7 +91,13 @@ render() {
             }} />
             {/* Here we can specify /animals because we've already routed to our first component. */}
             <Route exact path="/animals" render={(props) => {
-                return <AnimalList return deleteAnimal={this.deleteAnimal} animals={this.state.animals} />
+                return <AnimalList return deleteAnimal={this.deleteAnimal} animals={this.state.animals} {...props}/>
+            }} />
+            {/* Our shiny new route. We pass employees to the AnimalForm so a dropdown can be populated */}
+            <Route path="/animals/new" render={(props) => {
+                return <AnimalForm {...props}
+                                addAnimal={this.addAnimal}
+                                employees={this.state.employees} />
             }} />
             <Route path="/employees" render={(props) => {
                 // This says that 
