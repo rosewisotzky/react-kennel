@@ -12,6 +12,8 @@ import OwnerManager from '../modules/OwnersManager'
 import AnimalDetail from './animals/AnimalDetail'
 import { withRouter } from 'react-router'
 import AnimalForm from './animals/AnimalForm'
+import EmployeeDetail from './employee/EmployeeDetail'
+import OwnerDetail from './owners/OwnerDetail'
 
 
 
@@ -48,8 +50,7 @@ deleteAnimal = id => {
         this.setState({
         animals: animals        
     })
-}
-    )
+})
     
 }
 deleteEmployee = id => {
@@ -59,10 +60,12 @@ deleteEmployee = id => {
     .then(e => e.json())
     .then(() => fetch(`http://localhost:5002/employees`))
     .then(e => e.json())
-    .then(employees => this.setState({
+    .then(employees => {
+        this.props.history.push("/employees")
+        this.setState({
         employees: employees
     })
-    )
+})
 }
 deleteOwner = id => {
     return fetch(`http://localhost:5002/owners/${id}`, {
@@ -73,6 +76,18 @@ deleteOwner = id => {
     .then(e => e.json())
     .then(owners => this.setState({
         owners: owners
+    })
+    )
+}
+deleteLocation = id => {
+    return fetch(`http://localhost:5002/locations/${id}`, {
+        method: "DELETE"
+    })
+    .then(e => e.json())
+    .then(() => fetch(`http://localhost:5002/locations`))
+    .then(e => e.json())
+    .then(locations => this.setState({
+        locations: locations
     })
     )
 }
@@ -103,13 +118,22 @@ render() {
                                 addAnimal={this.addAnimal}
                                 employees={this.state.employees} />
             }} />
-            <Route path="/employees" render={(props) => {
+            <Route exact path="/employees" render={(props) => {
                 // This says that 
                 return <EmployeeList return deleteEmployee={this.deleteEmployee} employees={this.state.employees} />
             }} />
-            <Route path="/owners" render={(props) => {
-                return <OwnerList return deleteOwner={this.deleteOwner} owners={this.state.owners} />
+            <Route exact path="/owners" render={(props) => {
+                return <OwnerList deleteOwner={this.deleteOwner} owners={this.state.owners} />
             }} />
+            <Route path="/owners/:ownerId(\d+)" render={(props) => {
+                let owner = this.state.owners.find(owner =>
+                    owner.id === parseInt(props.match.params.ownerId))
+                    if (!owner) {
+                        owner = {id: 404, name:"404"}
+                    }
+                    return <OwnerDetail owner={ owner }
+                        deleteOwner= { this.deleteOwner } />
+            }}/>
             {/*
                 This is a new route to handle a URL with the following pattern:
                     http://localhost:3000/animals/1
@@ -123,7 +147,6 @@ render() {
                 let animal = this.state.animals.find(animal =>
                     animal.id === parseInt(props.match.params.animalId)
                 )
-
                 // If the animal wasn't found, create a default one
                 if (!animal) {
                     animal = {id:404, name:"404", breed: "Dog not found"}
@@ -132,6 +155,20 @@ render() {
                 return <AnimalDetail animal={ animal }
                             deleteAnimal={ this.deleteAnimal } />
             }} />
+            <Route path="/employees/:employeeId(\d+)" render={(props) => {
+            // Find the employee with the id of the route parameter
+            let employee = this.state.employees.find(employee =>
+                employee.id === parseInt(props.match.params.employeeId)
+            )
+
+            // If the employee wasn't found, create a default one
+            if (!employee) {
+                employee = {id:404, name:"404", breed: "Employee not found"}
+            }
+
+            return <EmployeeDetail employee={ employee }
+                        deleteEmployee={ this.deleteEmployee } />
+        }} />
         </React.Fragment>
     )
 }

@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Link } from "react-router-dom";
+
 
 export default class LocationList extends Component {
     render() {
@@ -9,6 +11,7 @@ export default class LocationList extends Component {
                     <div key={location.id}>
                     <p> {location.name} </p>
                     <p> {location.address} </p>
+                    <Link className="nav-link" to={`/employees/${location.id}`}>Details</Link>
                     </div>
                 )
             }
