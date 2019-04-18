@@ -22,7 +22,7 @@ export default class Animal extends Component {
                                 () => {
                                     this.setState(
                                         { saveDisabled: true },
-                                        () => this.props.dischargeAnimal(this.props.animal.id)
+                                        () => this.props.deleteAnimal(this.props.animal.id)
                                     )
                                 }
                             }
