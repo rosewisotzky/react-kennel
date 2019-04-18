@@ -27,24 +27,16 @@
   ],
   "animals": [
     {
-      "id": 1,
-      "name": "Rose",
-      "breed": "St Bernard"
+      "id": 6,
+      "name": "Checkers",
+      "breed": "Pomeranian",
+      "employeeId": 2
     },
     {
-      "id": 3,
-      "name": "Rose",
-      "breed": "Akita"
-    },
-    {
-      "id": 4,
-      "name": "Rose",
-      "breed": "Chihuahua"
-    },
-    {
-      "id": 5,
-      "name": "Rose",
-      "breed": "Great Dane"
+      "name": "Porkchop",
+      "breed": "Cartoon",
+      "employeeId": 3,
+      "id": 7
     }
   ],
   "owners": [
